@@ -1,4 +1,7 @@
-var userAgent = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36";
+var userAgent = "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:38.0) Gecko/20100101 Firefox/38.0";
+var AcceptH = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
+var AcceptEncoding = "gzip, deflate";
+var AcceptLanguage = "en-us,en;q=0.5";
 
 var requestFilter = {
     urls: [
@@ -6,16 +9,34 @@ var requestFilter = {
     ]
 };
 
-chrome.webRequest.onBeforeSendHeaders.addListener(function(details) {
+chrome.webRequest.onBeforeSendHeaders.addListener(function (details) {
     var headers = details.requestHeaders;
-    for(var i = 0, l = headers.length; i < l; ++i) {
-        if( headers[i].name == 'User-Agent' ) {
+    var end = 0;
+    var i = 0;
+    var l = headers.length;
+    for (i = 0; i < l; ++i) {
+        if (headers[i].name == 'User-Agent' && i < headers.length) {
+            headers[i].value = userAgent;
+            end = end + 1;
+        }
+        if (headers[i].name == 'Accept' && i < headers.length) {
+            headers[i].value = AcceptH;
+            end = end + 1;
+        }
+        if (headers[i].name == 'Accept-Encoding' && i < headers.length) {
+            headers[i].value = AcceptEncoding;
+            end = end + 1;
+        }
+        if (headers[i].name == 'Accept-Language' && i < headers.length) {
+            headers[i].value = AcceptLanguage;
+            end = end + 1;
+        }
+        if (end == 4) {
             break;
         }
     }
-    if(i < headers.length) {
-        headers[i].value = userAgent;
-    }
-    return {requestHeaders: headers};
-}, requestFilter, ['requestHeaders','blocking']);
 
+    return {
+        requestHeaders: headers
+    };
+}, requestFilter, ['requestHeaders', 'blocking']);
