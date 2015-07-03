@@ -2,13 +2,13 @@
 
 Private fork of <a href='https://github.com/mrbar42/X-Agent'>https://github.com/mrbar42/X-Agent</a>
 Current features:
-HTTP-HEADER:
+# HTTP-HEADER:
 -userAgent
 -Accept
 -AcceptEncoding
 -AcceptLanguage
 
-JS:
+# JS:
 -userAgent
 -vendor
 -appVersion
