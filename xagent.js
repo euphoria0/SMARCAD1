@@ -30,7 +30,7 @@
         });
     };
 
-    /*var defCanvas = function () {
+    var defCanvas = function () {
 	Object.defineProperty(CanvasRenderingContext2D.prototype, 'fillRect', {value: function() {return undefined;}});
 	Object.defineProperty(CanvasRenderingContext2D.prototype, 'textBassline', {value: undefined});
 	Object.defineProperty(CanvasRenderingContext2D.prototype, 'font', {value: undefined});
@@ -39,10 +39,9 @@
 	Object.defineProperty(CanvasRenderingContext2D.prototype, 'fillText', {value: undefined});
 	Object.defineProperty(HTMLCanvasElement.prototype, 'getContext', {value: function() {return undefined;}});
     };
-*/
     defNav();
     defScreen();
     defTime();
- //   defCanvas();
+    defCanvas();
 
 }());
