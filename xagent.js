@@ -1,7 +1,7 @@
 (function () {
     var USERAGENT = 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:38.0) Gecko/20100101 Firefox/38.0';
     var VENDOR = '';
-    var PLATFORM = 'Win32';
+    var PLATFORM = 'Win64';
     var PLUGINS = '';
     var WIDTH = '1920';
     var HEIGHT = '1080';
@@ -39,6 +39,7 @@
 	Object.defineProperty(CanvasRenderingContext2D.prototype, 'fillText', {value: undefined});
 	Object.defineProperty(HTMLCanvasElement.prototype, 'getContext', {value: function() {return undefined;}});
     };
+    
     defNav();
     defScreen();
     defTime();
