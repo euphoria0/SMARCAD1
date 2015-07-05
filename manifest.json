@@ -1,9 +1,10 @@
 {
-    "name": "X-Agent",
-    "version": "0.3",
+    "name": "SMARCAD1",
+    "version": "0.1.1",
     "manifest_version": 2,
-    "description": "Modify you user agent including javascript object",
+    "description": "chrome fingerprint spoofing",
     "permissions": [
+    "privacy",
     "webRequest",
     "webRequestBlocking",
     "<all_urls>"
@@ -11,13 +12,16 @@
     "background": {
         "scripts": ["background.js"]
     },
+    "icons": { "16": "icon16.png",
+           "48": "icon48.png",
+          "128": "icon128.png" },
     "content_scripts": [
         {
             "matches": ["*://*/*"],
-            "js": ["xagentScript.js"],
+            "js": ["injectScript.js"],
             "run_at": "document_start",
             "all_frames": true
     }
   ],
-    "web_accessible_resources": ["xagent.js"]
+    "web_accessible_resources": ["function.js"]
 }
