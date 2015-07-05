@@ -17,4 +17,7 @@ Current features:
 -width<br>
 -height<br>
 -colorDepth<br>
--getTimezoneOffset
+-getTimezoneOffset<br>
+
+# OTHER:
+-webRTC leak fix
