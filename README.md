@@ -5,26 +5,16 @@ Current features:
 # HTTP-HEADER:
 -userAgent<br>
 -Accept<br>
-
--AcceptEncoding
-
--AcceptLanguage
+-AcceptEncoding<br>
+-AcceptLanguage<br>
 
 # JS:
--userAgent
-
--vendor
-
--appVersion
-
--platform
-
--plugins
-
--width
-
--height
-
--colorDepth
-
+-userAgent<br>
+-vendor<br>
+-appVersion<br>
+-platform<br>
+-plugins<br>
+-width<br>
+-height<br>
+-colorDepth<br>
 -getTimezoneOffset
