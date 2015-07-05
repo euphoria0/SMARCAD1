@@ -1,31 +1,20 @@
-# Chrome Fingerprint Spoofing
+# SMARCAD1  - Chromium Fingerprint Spoofing
 
 Private fork of <a href='https://github.com/mrbar42/X-Agent'>https://github.com/mrbar42/X-Agent</a>
 Current features:
 # HTTP-HEADER:
--userAgent
-
--Accept
-
--AcceptEncoding
-
--AcceptLanguage
+-userAgent<br>
+-Accept<br>
+-AcceptEncoding<br>
+-AcceptLanguage<br>
 
 # JS:
--userAgent
-
--vendor
-
--appVersion
-
--platform
-
--plugins
-
--width
-
--height
-
--colorDepth
-
+-userAgent<br>
+-vendor<br>
+-appVersion<br>
+-platform<br>
+-plugins<br>
+-width<br>
+-height<br>
+-colorDepth<br>
 -getTimezoneOffset
