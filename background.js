@@ -8,7 +8,7 @@ var requestFilter = {
         "<all_urls>"
     ]
 };
-
+chrome.privacy.network.webRTCMultipleRoutesEnabled.set({'value': false});
 chrome.webRequest.onBeforeSendHeaders.addListener(function (details) {
     var headers = details.requestHeaders;
     var end = 0;
