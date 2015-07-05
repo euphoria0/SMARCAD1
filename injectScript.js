@@ -1,6 +1,7 @@
-var s = document.createElement('script');
-s.src = chrome.extension.getURL('function.js');
-s.onload = function () {
+var script = document.createElement('script');
+script.src = chrome.extension.getURL('function.js');
+script.onload = function () {
     this.parentNode.removeChild(this);
 };
-(document.head || document.documentElement).appendChild(s);
+var parent = document.getElementsByTagName('head')[0] || document.documentElement;
+parent.appendChild(script);

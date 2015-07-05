@@ -2,6 +2,7 @@
     "name": "SMARCAD1",
     "version": "0.1.1",
     "manifest_version": 2,
+    "options_page": "options.html",
     "description": "chrome fingerprint spoofing",
     "permissions": [
     "privacy",
