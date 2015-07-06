@@ -17,8 +17,7 @@ chrome.webRequest.onBeforeSendHeaders.addListener(function (details) {
     for (i = 0; i < l; ++i) {
         if (headers[i].name == 'User-Agent' && i < headers.length) {
             headers[i].value = userAgent;
-            end = end + 1;
-        }
+            end = end + 1;}
         if (headers[i].name == 'Accept' && i < headers.length) {
             headers[i].value = AcceptH;
             end = end + 1;
@@ -31,7 +30,7 @@ chrome.webRequest.onBeforeSendHeaders.addListener(function (details) {
             headers[i].value = AcceptLanguage;
             end = end + 1;
         }
-        if (end == 4) {
+        if (end == 5) {
             break;
         }
     }

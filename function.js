@@ -120,10 +120,10 @@
             value: "",
             writable: true
         });
-        Object.defineProperty(HTMLSpanElement.prototype, "offsetHeight", {
+        Object.defineProperty(HTMLElement.prototype, "offsetHeight", {
             value: 0
         });
-        Object.defineProperty(HTMLSpanElement.prototype, "offsetWidth", {
+        Object.defineProperty(HTMLElement.prototype, "offsetWidth", {
             value: 0
         });
         Object.defineProperty(history, "length", {
