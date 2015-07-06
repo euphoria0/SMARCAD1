@@ -1,9 +1,33 @@
 <!DOCTYPE html>
 <html>
-<head><title>My Test Extension Options</title></head>
-<body>
 
-Disable WebGL:
-Enable <a href="chrome://flags/#disable-webgl">this</a> flag to disable WebGL. Restart you browser afterwards.
+<head>
+    <title>My Test Extension Options</title>
+</head>
+
+<body>
+    <form>
+        <div id="error"></div>
+        USERAGENT:
+        <br>
+        <input type="text" id="ua" size="100">
+        <br>
+        ACCEPT:
+        <br>
+        <input type="text" id="ah" size="100">
+        <br>
+        ACCEPT LANGUAGE:
+        <br>
+        <input type="text" id="al" size="100">
+        <br>
+        ACCEPT ENCODING:
+        <br>
+        <input type="text" id="ae" size="100">
+        <br>
+    </form>
+    <button id="save">Save</button>
+<div id="status"></div>
+    <script src="options.js"></script>
 </body>
+
 </html>
