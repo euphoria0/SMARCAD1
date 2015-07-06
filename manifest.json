@@ -6,6 +6,7 @@
     "description": "chrome fingerprint spoofing",
     "permissions": [
     "privacy",
+    "contentSettings",
     "webRequest",
     "webRequestBlocking",
     "<all_urls>"
