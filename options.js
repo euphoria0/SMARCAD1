@@ -12,7 +12,7 @@ function save_options() {
         hg: document.getElementById('hg').value,
         cd: document.getElementById('cd').value,
         os: document.getElementById('os').value,
-        tz: document.getElementById('tz').value
+        tz: document.getElementById("tz").options[document.getElementById("tz").selectedIndex].value
     }, function () {
         var status = document.getElementById('status');
         status.textContent = 'Options saved.';
@@ -23,6 +23,7 @@ function save_options() {
 };
 
 function restore_options() {
+    e = document.getElementById("tz");
     chrome.storage.local.get({
         ua: '',
         ah: '',
@@ -48,7 +49,7 @@ function restore_options() {
         document.getElementById('hg').value = items.hg;
         document.getElementById('cd').value = items.cd;
         document.getElementById('os').value = items.os;
-        document.getElementById('tz').value = items.tz;
+        document.getElementById("tz").selectedIndex = items.tz;
     })
 
 }

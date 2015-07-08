@@ -40,16 +40,27 @@ var injectJS = function () {
     code += 'var HEIGHT="' + hg + '";';
     code += 'var COLORDEPTH="' + cd + '";';
     code += 'var OSCPU="' + os + '";';
-    code += 'var oldTime = new Date();';
-    code += 'var oldOFFSET=(oldTime.getTimezoneOffset())/60;';
-    code += 'var gmtTIME = new Date(Number(oldTime)+(oldOFFSET*3600000));';
-    code += 'var TIMEZONEOFFSET=("' + tz + '"* -60);';
-    code += 'var newTime = new Date(Number(gmtTIME)+(3600000*"' + tz + '"));';
-    code += 'var LOCALESTRING = newTime.toLocaleString();';
-    code += 'var LOCALEDATESTRING = newTime.toLocaleDateString();';
-    code += 'var TIMESTRING = newTime.toTimeString();';
-    code += 'var LOCALETIMESTRING = newTime.toLocaleTimeString();';
-    code += 'var TIME = String(newTime);';
+    code += "var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];";
+    code += "var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];";
+    code += "var split = String('" + tz + "').split('_');";
+    code += "var padDigits = function (number, digits) {return Array(Math.max(digits - String(number).length + 1, 0)).join(0) + number;};";
+    code += "var d = new Date();";
+    code += "d.setUTCHours(+d.getUTCHours()+Number(split[1]));";
+    code += "var dayweek = d.getUTCDay();";
+    code += "var month = d.getUTCMonth();";
+    code += "var daymonth = d.getUTCDate();";
+    code += "var year = d.getUTCFullYear();";
+    code += "var hours = d.getUTCHours();";
+    code += "var minutes = d.getUTCMinutes();";
+    code += "var seconds = d.getUTCSeconds();";
+    code += "var TIMEZONEOFFSET = (split[1]*(-60));";
+    code += "var RETURNTIME = days[dayweek] + ' ' + months[month] + ' ' + padDigits(daymonth, 2) + ' ' + year + ' ' + padDigits(hours,2) + ':' + padDigits(minutes,2) + ':' + padDigits(seconds,2) + ' GMT' + split[1] + '00 (' + split[0] + ')';";
+    code += "var amPM = function (hours) {if (hours >= 12) {return 'PM';}else{return 'AM';}};";
+    code += "var LOCALEDATESTRING = (+month+1) + '/' + daymonth + '/' + year;";
+    code += "var LOCALESTRING = (+month+1) + '/' + daymonth + '/' + year + ', ' + hours + ':' + minutes + ':' + seconds + ' ' + amPM(hours);";
+    code += "var TIMESTRING = padDigits(hours,2) + ':' + padDigits(minutes,2) + ':' + padDigits(seconds,2) + ' GMT' + split[1] + '00 (' + split[0] + ')';";
+    code += "var LOCALETIMESTRING = hours + ':' + minutes + ':' + seconds + ' ' + amPM(hours);";
+
     code += '(' + function () {
 
         var defNav = function () {
@@ -95,9 +106,14 @@ var injectJS = function () {
         };
 
         var defTime = function () {
+            Object.defineProperty(Date.prototype, 'getTimezoneOffset', {
+                value: function () {
+                    return TIMEZONEOFFSET;
+                }
+            });
             Object.defineProperty(Date.prototype, 'toString', {
                 value: function () {
-                    return TIME;
+                    return RETURNTIME;
                 }
             });
             Object.defineProperty(Date.prototype, "toLocaleString", {
@@ -120,13 +136,7 @@ var injectJS = function () {
                     return LOCALETIMESTRING;
                 }
             });
-            Object.defineProperty(Date.prototype, 'getTimezoneOffset', {
-                value: function () {
-                    return TIMEZONEOFFSET;
-                }
-            });
         };
-
         var defCanvas = function () {
             Object.defineProperty(CanvasRenderingContext2D.prototype, 'fillRect', {
                 value: function () {
@@ -177,8 +187,8 @@ var injectJS = function () {
     var script = document.createElement('script');
     script.textContent = code;
     /*script.onload = function () {
-    this.parentNode.removeChild(this);
-};*/
+        this.parentNode.removeChild(this);
+    };*/
     var parent = document.getElementsByTagName('head')[0] || document.documentElement;
     parent.appendChild(script);
 }
