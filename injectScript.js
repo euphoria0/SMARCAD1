@@ -7,6 +7,7 @@ var hg = '';
 var cd = '';
 var os = '';
 var tz = '';
+var whitelist = '';
 chrome.storage.local.get({
     ua: '',
     vd: '',
@@ -16,7 +17,8 @@ chrome.storage.local.get({
     hg: '',
     cd: '',
     os: '',
-    tz: ''
+    tz: '',
+    whitelist: ''
 }, function (items) {
     if (items.ua != "null") ua = items.ua;
     if (items.vd != "null") vd = items.vd;
@@ -27,6 +29,7 @@ chrome.storage.local.get({
     if (items.cd != "null") cd = items.cd;
     if (items.os != "null") os = items.os;
     if (items.tz != "null") tz = items.tz;
+    if (items.whitelist != "null") whitelist = items.whitelist;
     injectJS();
 });
 
@@ -57,9 +60,9 @@ var injectJS = function () {
     code += "var RETURNTIME = days[dayweek] + ' ' + months[month] + ' ' + padDigits(daymonth, 2) + ' ' + year + ' ' + padDigits(hours,2) + ':' + padDigits(minutes,2) + ':' + padDigits(seconds,2) + ' GMT' + split[1] + '00 (' + split[0] + ')';";
     code += "var amPM = function (hours) {if (hours >= 12) {return 'PM';}else{return 'AM';}};";
     code += "var LOCALEDATESTRING = (+month+1) + '/' + daymonth + '/' + year;";
-    code += "var LOCALESTRING = (+month+1) + '/' + daymonth + '/' + year + ', ' + hours + ':' + minutes + ':' + seconds + ' ' + amPM(hours);";
+    code += "var LOCALESTRING = (+month+1) + '/' + daymonth + '/' + year + ', ' + padDigits(hours,2) + ':' + padDigits(minutes,2) + ':' + padDigits(seconds,2) + ' ' + amPM(hours);";
     code += "var TIMESTRING = padDigits(hours,2) + ':' + padDigits(minutes,2) + ':' + padDigits(seconds,2) + ' GMT' + split[1] + '00 (' + split[0] + ')';";
-    code += "var LOCALETIMESTRING = hours + ':' + minutes + ':' + seconds + ' ' + amPM(hours);";
+    code += "var LOCALETIMESTRING = padDigits(hours,2) + ':' + padDigits(minutes,2) + ':' + padDigits(seconds,2) + ' ' + amPM(hours);";
 
     code += '(' + function () {
 
@@ -184,11 +187,22 @@ var injectJS = function () {
         defMisc();
 
     } + ')();';
+    var inWL = false;
+    var currentSite = window.location.href;
+    for (var i = 0; i < whitelist.length; i++) {
+        if (currentSite.includes(whitelist[i]) && whitelist[0] != "") {
+            inWL = true;
+            break;
+        }
+    }
+    if (inWL == true) {
+        return;
+    };
     var script = document.createElement('script');
     script.textContent = code;
-    /*script.onload = function () {
+    script.onload = function () {
         this.parentNode.removeChild(this);
-    };*/
+    };
     var parent = document.getElementsByTagName('head')[0] || document.documentElement;
     parent.appendChild(script);
 }
