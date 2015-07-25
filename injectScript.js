@@ -140,29 +140,33 @@ var injectJS = function () {
                 }
             });
         };
-        var defCanvas = function () {
-            Object.defineProperty(CanvasRenderingContext2D.prototype, 'fillRect', {
-                value: function () {
-                    return undefined;
-                }
-            });
-            Object.defineProperty(CanvasRenderingContext2D.prototype, 'textBassline', {
-                value: undefined
-            });
-            Object.defineProperty(CanvasRenderingContext2D.prototype, 'font', {
-                value: undefined
-            });
-            Object.defineProperty(CanvasRenderingContext2D.prototype, 'fillStyle', {
-                value: undefined
-            });
-            Object.defineProperty(CanvasRenderingContext2D.prototype, 'strokeStyle', {
-                value: undefined
-            });
-            Object.defineProperty(CanvasRenderingContext2D.prototype, 'fillText', {
-                value: undefined
-            });
-            //Object.defineProperty(HTMLCanvasElement.prototype, 'getContext', {value: function() {return this;}});
-        };
+    /*    var defCanvas = function () {
+        Object.defineProperty(CanvasRenderingContext2D.prototype, 'fillRect', {
+            value: function () {
+                return undefined;
+            }
+        });
+        Object.defineProperty(CanvasRenderingContext2D.prototype, 'textBassline', {
+            value: undefined
+        });
+        Object.defineProperty(CanvasRenderingContext2D.prototype, 'font', {
+            value: undefined
+        });
+        Object.defineProperty(CanvasRenderingContext2D.prototype, 'fillStyle', {
+            value: undefined
+        });
+        Object.defineProperty(CanvasRenderingContext2D.prototype, 'strokeStyle', {
+            value: undefined
+        });
+        Object.defineProperty(CanvasRenderingContext2D.prototype, 'fillText', {
+            value: undefined
+        });
+        Object.defineProperty(HTMLCanvasElement.prototype, 'getContext', {
+            value: function () {
+                return this;
+            }
+        });
+    };*/
 
         var defMisc = function () {
             Object.defineProperty(window, "name", {
@@ -183,7 +187,7 @@ var injectJS = function () {
         defNav();
         defScreen();
         defTime();
-        defCanvas();
+        //defCanvas();
         defMisc();
 
     } + ')();';
@@ -200,11 +204,14 @@ var injectJS = function () {
     };
     var script = document.createElement('script');
     script.textContent = code;
-    script.onload = function () {
-        this.parentNode.removeChild(this);
-    };
-    var parent = document.getElementsByTagName('head')[0] || document.documentElement;
+    /* script.onload = function () {
+     //this.parentNode.removeChild(this);
+ };*/
+    var first = document.getElementsByTagName('script')[0];
+    //first.parentNode.removeChild(first);
+    var parent = document.head || document.documentElement;
     parent.appendChild(script);
+    //first.parentNode.insertBefore(script, first);
 }
 
 //var dummy = document.createElement('script');
