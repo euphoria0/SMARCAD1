@@ -26,5 +26,5 @@
             "all_frames": true
     }
   ],
-    "web_accessible_resources": ["function.js"]
+    "web_accessible_resources": ["inject.js"]
 }
